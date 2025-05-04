@@ -1,11 +1,5 @@
-import os
-import json
-import re
-import pymupdf
-import base64
-import tiktoken
-import traceback
-import difflib 
+import os, re, json, base64, difflib, pymupdf, \
+    traceback, concurrent.futures
 from openai import OpenAI
 
 os.chdir('projects/gpt-sc-review')
@@ -18,7 +12,7 @@ MAX_CTX_A = 1_047_576
 MAX_CTX_B = 1_047_576
 RESERVE_TOKENS_A = 32_768
 RESERVE_TOKENS_B = 32_768
-ENC = tiktoken.get_encoding('cl100k_base')
+MAX_WORKERS = 8
 
 SYSTEM_PROMPT_A = '''
 =============================================================
@@ -34,13 +28,13 @@ produce structured summaries that:
 **Derive all scientific content strictly and exclusively from the paper**.
 
 **Apply the tag system** (detailed below) to highlight priority findings,
-confidence levels, and potential contradictions.
+confidence levels, and potential contradictions / departures **explicitly
+discussed within the paper**.
 
-Use the instructions below to ensure **comprehensive coverage** of each
-paper's **cell-type heterogeneity**, **disease mechanisms**, **validation
+Use the instructions below to ensure **coverage** of each paper's
+**cell-type heterogeneity**, **disease mechanisms**, **validation
 methods**, and **possible conflicts**—all while maintaining a **cohesive
-narrative style**. Use general knowledge only to identify contradictions;
-do **not** introduce new claims.
+narrative style**. Do **not** introduce new claims based on general knowledge.
 
 -------------------------------------------------------------
 1) USER-SPECIFIED CELL TYPE FOCUS
@@ -80,7 +74,8 @@ do **not** introduce new claims.
     hybridisation),
   - Aging/disease stage transitions (pseudotime, computational
     modelling),
-  - Contradictions with other known models or prior data.
+  - Contradictions or departures from prior data **explicitly discussed by
+    the authors within the paper**.
   - Host or genetic drivers (age, sex, APOE, GWAS variants) and
     quantitative activation/morphology scores (e.g., PAM stages,
     compactness) that influence the chosen cell type.
@@ -95,6 +90,10 @@ do **not** introduce new claims.
 -------------------------------------------------------------
 Use the following tags, but keep <metadata> and <methods> succinct.
 **Focus** on <findings> and <clinical> details.
+**If the paper reports minimal or no significant findings for the `CELL_TYPE`
+across most categories, summarize this overall pattern concisely in the
+<findings> section introduction or relevant subsections, rather than
+elaborating detailed negatives for every category.**
 
 PAPER IDENTIFICATION <metadata>
 - Full citation (Authors, Year, Journal)
@@ -164,9 +163,11 @@ Since each summary focuses on **one paper**, provide:
       'Mic.13 is APOE ε4-enriched').
     - Minimal mention of methodology unless essential.
 
-2) **Detailed Summary (≈800-1000 words)**
+2) **Detailed Summary (≈800-1000 words, shorter if findings sparse)**
     - Expand on the content outlined in Section 3 (<metadata>, <methods>,
       <findings>, <clinical>) in **paragraphs**. Avoid bullet lists.
+      **If findings for the `CELL_TYPE` are sparse, prioritize conciseness
+      over the target word count.**
     - Highlight morphological/spatial or temporal data if presented.
     - **Use the Tag System** (defined in Section 5) below to flag
       priorities, confidence levels, and potential contradictions within
@@ -194,15 +195,17 @@ Since each summary focuses on **one paper**, provide:
     consider 'medium' confidence unless validated in vivo.
 
 - <contradictionFlag>none | details</contradictionFlag>
-  - **'details'** if the paper's claims conflict with known models or
-    other studies.
-  - Provide a brief note explaining the contradiction if possible.
+  - **'details'** **only if the paper *explicitly discusses* specific findings
+    conflicting with known models or other studies.**
+  - Provide a brief note explaining the comparison **as described by the
+    authors.**
   - If no conflicts are found, set <contradictionFlag>none</contradictionFlag>
     for each major claim.
 
 **Important**:
 - Insert these tags **within the Detailed Summary** paragraphs to
-  highlight key points.
+  highlight key points. Ensure `<contradictionFlag>details</contradictionFlag>`
+  reflects only explicitly discussed comparisons.
 - Even if no contradictions exist, use
   <contradictionFlag>none</contradictionFlag> to confirm.
 
@@ -213,18 +216,22 @@ END OF PROMPT A
 
 SYSTEM_PROMPT_B = '''
 =============================================================
-PROMPT B (Fact-Checking & Refinement - No Count)
+PROMPT B (Fact-Checking & Structural Standardization)
 =============================================================
 SYSTEM MESSAGE:
-You are a **High-Fidelity Verification Agent**. Your sole purpose is to
-ensure the **factual accuracy** of the provided `Initial Summary` by
-verifying every claim against the `Full PDF Text` (and associated images).
-You make **only essential corrections** while **preserving the original
-structure and style absolutely**. Your focus is information pertaining
-to the user-specified `CELL_TYPE`.
+You are a **High-Fidelity Verification and Standardization Agent**. Your
+purpose is twofold:
+1.  Ensure the **factual accuracy** of the provided `Initial Summary` by
+    verifying every claim against the `Full PDF Text` (and associated images).
+2.  Ensure the final output strictly adheres to a **Standard Output
+    Structure**.
+
+You apply corrections minimally and preserve original phrasing whenever
+possible, focusing on information pertaining to the user-specified
+`CELL_TYPE`.
 
 -------------------------------------------------------------
-1) INPUTS
+1) INPUTS (Unchanged)
 -------------------------------------------------------------
 - `Full PDF Text & Images`: The complete text extracted from the
   original scientific paper and associated relevant images. This is
@@ -235,68 +242,127 @@ to the user-specified `CELL_TYPE`.
   of the summary verification.
 
 -------------------------------------------------------------
-2) CORE INSTRUCTIONS
+2) CORE INSTRUCTIONS (Revised Order & Formatting Rule)
 -------------------------------------------------------------
-- **Strict Source Grounding**:
-  - Systematically examine each factual statement within the
-    `Initial Summary`, especially those related to the `CELL_TYPE`.
-  - For each statement, locate the ***exact supporting evidence***
-    within the `Full PDF Text` or Figures.
-  - Any statement lacking direct, unambiguous support from the
-    source material **must be corrected or removed**.
-  - Do ***not*** use external knowledge or make inferences beyond what
-    is explicitly stated in the source material.
 
-- **Minimal Correction Principle**:
-  - **Priority 1: Correction:** Modify statements ***only*** to align
-    them perfectly with the source material. Correct inaccuracies
-    in data, relationships, terminology, gene names, etc. If a
-    statement is entirely unsubstantiated, **remove it**.
-  - **Priority 2: Preservation:** Retain the original wording,
-    phrasing, and sentence structure whenever possible. **Avoid
-    rephrasing** if the original is factually correct according
-    to the source. Edits must be surgical.
-  - **Priority 3: Constrained Addition:** Add information ***only***
-    if its absence makes an existing, related statement about the
-    `CELL_TYPE` factually ***incomplete or misleading*** according
-    to the source material. Insert the ***minimum necessary***
-    information directly from the source to rectify this.
+**PRIORITY 1: STRICT SOURCE GROUNDING & FACTUAL CORRECTION**
+- **Verify Facts:** Systematically examine each factual statement within the
+  `Initial Summary`, especially those related to the `CELL_TYPE`. Locate the
+  ***exact supporting evidence*** within the `Full PDF Text` or Figures.
+- **Apply Minimal Correction Principle:**
+  - **Correction:** Modify statements ***only*** to align them perfectly
+    with the source material. Correct inaccuracies in data, relationships,
+    terminology, gene names, etc.
+  - **Removal:** If a statement is entirely unsubstantiated by the source
+    material, **remove it**.
+  - **Preservation:** Retain the original wording and phrasing whenever
+    possible *if the statement is factually correct*. Edits must be surgical.
+  - **Constrained Addition:** Add information ***only*** if its absence makes
+    an existing, related statement about the `CELL_TYPE` factually
+    ***incomplete or misleading*** according to the source. Insert the
+    ***minimum necessary*** information directly from the source.
+- **No External Knowledge:** Do ***not*** use external knowledge or make
+  inferences beyond what is explicitly stated in the source material.
 
-- **Absolute Format Integrity**:
-  - The output ***must*** replicate the ***exact*** structure and
-    formatting of the `Initial Summary`.
-  - Preserve the presence, order, and content (unless corrected) of:
-    - Sections (e.g., Quick Reference, Detailed Summary, Research
-      Implications, or others if present in the input).
-    - Paragraph breaks, spacing, and overall layout.
-    - All original XML-like tags, including attributes:
-      (e.g., `<code><metadata></code>`, `<code><methods></code>`,
-      `<code><findings></code>`, `<code><clinical></code>`,
-      `<code><keyFinding priority='...'></code>`,
-      `<code><confidenceLevel>...</code>`, `<code><contradictionFlag>...</code>`, etc.)
-  - Do not alter tag attributes unless the correction requires it
-    based ***only*** on evidence in the source material.
+**PRIORITY 2: STRUCTURAL STANDARDIZATION**
+- **Define Standard Output Structure:** The final output *must* follow this
+  exact structure and order:
+    ```
+    **Quick Reference** (...)
+    ---
+    **Detailed Summary** (...)
+    [This section MUST contain the following tags/sections internally,
+     in order: <metadata>...</metadata>, <methods>...</methods>,
+     <findings>...</findings>, <clinical>...</clinical>]
+    ---
+    **Research Implications** (...)
+    ```
+- **Enforce Structure:** After verifying/correcting the content (Priority 1),
+  examine the structure of the (potentially modified) `Initial Summary`.
+  - **If** the structure **matches** the Standard Output Structure, preserve
+    it exactly (including paragraph breaks, spacing, tags, etc., as per
+    Priority 1).
+  - **If** the structure **deviates** (e.g., missing sections, incorrect
+    order, extraneous sections like preliminary `<findings>` blocks):
+    - **Reorganize:** Rearrange the *verified* content blocks to fit the
+      Standard Output Structure.
+    - **Remove Extraneous Content:** Delete any sections or content blocks
+      from the `Initial Summary` that are not part of the Standard Output
+      Structure (e.g., remove preliminary `<findings>` or `<clinical>`
+      blocks that appear *before* the `**Quick Reference**`).
+    - **Preserve During Reorganization:** While reorganizing, preserve the
+      verified phrasing, sentences, paragraph breaks within moved blocks,
+      and all original XML-like tags (e.g., `<keyFinding>`,
+      `<confidenceLevel>`, `<contradictionFlag>`) associated with their
+      content as much as possible. Do not alter tag attributes unless
+      required by factual correction (Priority 1).
 
 -------------------------------------------------------------
-3) OUTPUT SPECIFICATION
+3) OUTPUT SPECIFICATION (Revised)
 -------------------------------------------------------------
-- Generate ***only*** the full text of the revised summary, adhering
-  strictly to the **Minimal Correction Principle** and **Absolute
-  Format Integrity** rules.
-- Do ***not*** include any other text, explanations, or comments.
+- Generate ***only*** the full text of the revised summary.
+- The output MUST adhere strictly to the **Minimal Correction Principle** for
+  content and the **Standard Output Structure** for format.
+- Do ***not*** include any other text, explanations, or comments about the
+  changes made.
 
 =============================================================
 END OF PROMPT B
 =============================================================
 '''
 
-client = OpenAI(api_key=API_KEY)
+SYSTEM_PROMPT_C = '''
+=============================================================
+PROMPT C (Identify Insufficient Detail)
+=============================================================
+SYSTEM MESSAGE:
+You are a detail-oriented analysis assistant. Your task is to review a
+collection of paper summaries provided in Markdown format. Each summary
+is associated with a unique identifier (PID), typically found in the
+header (e.g., "# summary for [PID] (...)").
 
-def extract_text(pdf_path: str) -> str:
-    doc = pymupdf.open(pdf_path)
-    pages = [page.get_text() or '' for page in doc]
-    doc.close()
-    return '\f'.join(pages) 
+Your goal is to identify summaries that offer **minimal specific detail**
+about the biological `CELL_TYPE` specified by the user. "Minimal specific
+detail" means the summary mentions the `CELL_TYPE` but provides very few
+or no specifics about:
+- Distinct subtypes or states reported in the paper.
+- Key defining marker genes for those subtypes/states.
+- Specific functional roles attributed to the `CELL_TYPE` or its
+  subtypes in the context of the study (e.g., disease association,
+  pathway involvement).
+- Quantitative changes or significant findings directly related to the
+  `CELL_TYPE`.
+
+Summaries that simply state the `CELL_TYPE` was present or analysed,
+without elaborating on its characteristics or findings based on the paper,
+should be flagged.
+
+-------------------------------------------------------------
+INPUT:
+-------------------------------------------------------------
+1.  `Markdown Content`: A string containing multiple paper summaries,
+    each marked with a header like "# summary for [PID] (...)".
+2.  `CELL_TYPE`: The specific cell type focus (e.g., microglia).
+
+-------------------------------------------------------------
+OUTPUT SPECIFICATION:
+-------------------------------------------------------------
+- Return **only** a plain text list of the unique identifiers (PIDs)
+  for the summaries identified as insufficient.
+- Each PID should be on a **new line**.
+- Do **not** include headers, explanations, or any other text.
+
+Example Output:
+PID_A
+PID_C
+PID_F
+
+=============================================================
+END OF PROMPT C
+=============================================================
+'''
+
+client = OpenAI(api_key=API_KEY)
 
 def extract_text_and_images(pdf_path: str) -> tuple[str, list[dict]]:
     doc = pymupdf.open(pdf_path)
@@ -310,26 +376,26 @@ def extract_text_and_images(pdf_path: str) -> tuple[str, list[dict]]:
             break
         full_text.append(page.get_text(sort=True) or '')
         img_list = page.get_images(full=True)
-        
+
         for _, img in enumerate(img_list):
             if len(images_data) >= max_images:
-                break 
+                break
             xref = img[0]
             try:
                 base_image = doc.extract_image(xref)
-                img_width = base_image.get("width", 0)
-                img_height = base_image.get("height", 0)
-                
+                img_width = base_image.get('width', 0)
+                img_height = base_image.get('height', 0)
+
                 if img_width < min_dimension or img_height < min_dimension:
                     continue
 
-                image_bytes = base_image["image"]
-                ext = base_image["ext"]
+                image_bytes = base_image['image']
+                ext = base_image['ext']
                 image_b64 = base64.b64encode(image_bytes).decode('utf-8')
                 images_data.append({
-                    "page": page_num + 1,
-                    "b64": image_b64,
-                    "ext": ext
+                    'page': page_num + 1,
+                    'b64': image_b64,
+                    'ext': ext
                 })
             except Exception as e:
                 print(f'warning: could not extract image xref {xref} on '
@@ -339,30 +405,27 @@ def extract_text_and_images(pdf_path: str) -> tuple[str, list[dict]]:
     cleaned_text = re.sub(r'\n\s*\n', '\n\n', '\f'.join(full_text)).strip()
     return cleaned_text, images_data
 
-def count_tokens(text: str) -> int:
-    return len(ENC.encode(text))
-
-def generate_summary(pdf_text: str, images_data: list[dict], 
+def generate_summary(pdf_text: str, images_data: list[dict],
                      focus_cell_type: str) -> str:
 
-    message_content = [{"type": "text", "text": pdf_text}]
+    message_content = [{'type': 'text', 'text': pdf_text}]
     for img_data in images_data:
         message_content.append({
-            "type": "text",
-            "text": f"\n--- Figure Content (Page {img_data['page']}) ---"
+            'type': 'text',
+            'text': f'\n--- Figure Content (Page {img_data['page']}) ---'
         })
         message_content.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/{img_data['ext']};base64,{img_data['b64']}",
-                "detail": "low"
+            'type': 'image_url',
+            'image_url': {
+                'url': f'data:image/{img_data['ext']};base64,{img_data['b64']}',
+                'detail': 'high'
             }
         })
     resp = client.chat.completions.create(
         model=MODEL_A,
         messages=[
             {'role': 'system', 'content': SYSTEM_PROMPT_A},
-            {'role': 'user', 'content': f"CELL_TYPE: {focus_cell_type}"},
+            {'role': 'user', 'content': f'CELL_TYPE: {focus_cell_type}'},
             {'role': 'user', 'content': message_content},
         ],
         max_tokens=RESERVE_TOKENS_A,
@@ -373,32 +436,31 @@ def generate_summary(pdf_text: str, images_data: list[dict],
     )
     return resp.choices[0].message.content
 
-def refine_summary(pdf_text: str, images_data: list[dict], 
-                   initial_summary: str, 
+def refine_summary(pdf_text: str, images_data: list[dict],
+                   initial_summary: str,
                    focus_cell_type: str) -> str:
 
     content_list_main = []
-    content_list_main.append({"type": "text", 
-                             "text": f"Full PDF Text:\n{pdf_text}"})
-    
+    content_list_main.append({
+        'type': 'text',
+        'text': f'Full PDF Text:\n{pdf_text}'
+        })
     for img_data in images_data:
         content_list_main.append({
-            "type": "text",
-            "text": f"\n--- Figure Content (Page {img_data['page']}) ---"
+            'type': 'text',
+            'text': f'\n--- Figure Content (Page {img_data['page']}) ---'
         })
         content_list_main.append({
-            "type": "image_url",
-            "image_url": {
-                "url": f"data:image/{img_data['ext']};base64,{img_data['b64']}",
-                "detail": "low"
+            'type': 'image_url',
+            'image_url': {
+                'url': f'data:image/{img_data['ext']};base64,{img_data['b64']}',
+                'detail': 'high'
             }
         })
-        
     content_list_main.append({
-        "type": "text",
-        "text": f"\n\nInitial Summary to Fact-Check:\n{initial_summary}"
+        'type': 'text',
+        'text': f'\n\nInitial Summary to Fact-Check:\n{initial_summary}'
     })
-
     resp = client.chat.completions.create(
         model=MODEL_B,
         messages=[
@@ -414,21 +476,14 @@ def refine_summary(pdf_text: str, images_data: list[dict],
     )
     return resp.choices[0].message.content.strip()
 
-def calculate_corrections(initial: str, final: str) -> int:
-    d = difflib.Differ()
-    diff = list(d.compare(
-        initial.splitlines(keepends=True), 
-        final.splitlines(keepends=True)))
-    correction_blocks = 0
-    in_block = False
-    for line in diff:
-        if line.startswith('+ ') or line.startswith('- '):
-            if not in_block:
-                correction_blocks += 1
-                in_block = True
-        elif line.startswith('  '):
-            in_block = False        
-    return correction_blocks
+def calculate_similarity_score(initial: str, final: str) -> float:
+    def normalize(text: str) -> list[str]:
+        lines = [line.strip() for line in text.splitlines()]
+        return [line for line in lines if line]
+    initial_norm = '\n'.join(normalize(initial))
+    final_norm = '\n'.join(normalize(final))
+    matcher = difflib.SequenceMatcher(None, initial_norm, final_norm)
+    return matcher.ratio()
 
 def load_summaries(json_path: str) -> dict:
     if not os.path.exists(json_path):
@@ -444,6 +499,49 @@ def save_summaries(json_path: str, summaries: dict):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(summaries, f, indent=2, ensure_ascii=False)
 
+def process_single_paper(pid: str, pdf_path: str,
+                         existing_initial_summary: str | None) -> dict | None:
+    try:
+        print(f'[{pid}] extracting text/images...')
+        pdf_text, images_data = extract_text_and_images(pdf_path)
+
+        initial_summary = existing_initial_summary
+        if initial_summary is None:
+            print(f'[{pid}] generating initial summary...')
+            initial_summary = generate_summary(
+                pdf_text, images_data, CELL_TYPE
+            )
+        else:
+             print(f'[{pid}] using existing initial summary.')
+
+        if initial_summary is None:
+            print(f'[{pid}] error: initial summary generation failed.')
+            return None
+
+        print(f'[{pid}] refining summary...')
+        fact_checked_summary = refine_summary(
+            pdf_text, images_data, initial_summary, CELL_TYPE
+        )
+        similarity_score = calculate_similarity_score(
+            initial_summary, fact_checked_summary
+        )
+        print(f'[{pid}] finished (similarity: {similarity_score:.4f}).')
+
+        return {
+            'pdf': pid,
+            'cell_type': CELL_TYPE,
+            'initial summary': initial_summary,
+            'fact-checked summary': fact_checked_summary,
+            'similarity score': similarity_score
+        }
+    except ValueError as e:
+         print(f'\n[{pid}] skipped. Reason: {e}')
+         return None
+    except Exception as e:
+        print(f'\n[{pid}] failed with error: {e}')
+        traceback.print_exc()
+        return None
+
 def main():
     in_dir = 'pdfs'
     out_dir = 'out'
@@ -451,79 +549,144 @@ def main():
     json_path = os.path.join(out_dir, f'{CELL_TYPE}_summaries.json')
     summaries = load_summaries(json_path)
 
+    tasks_to_run = []
     for pdf_file in sorted(os.listdir(in_dir)):
+        if not pdf_file.lower().endswith('.pdf'):
+            continue
         pid = os.path.splitext(pdf_file)[0]
         if pid in summaries and summaries[pid].get('fact-checked summary'):
-            print(f'[{pid}] exists with fact-checked summary. skipping.')
+            print(f'[{pid}] already processed. skipping.')
             continue
         pdf_path = os.path.join(in_dir, pdf_file)
+        existing_initial = summaries.get(pid, {}).get('initial summary')
+        tasks_to_run.append((pid, pdf_path, existing_initial))
 
-        try:
-            print(f'[{pid}] extracting text and images...', end=' ')
-            pdf_text, images_data = extract_text_and_images(pdf_path)
-            
-            initial_summary = None
-            if pid in summaries and summaries[pid].get('initial summary'):
-                print(f'found existing initial summary...', end=' ')
-                initial_summary = summaries[pid]['initial summary']
-            else:
-                print(f'generating summary...', end=' ')
-                initial_summary = generate_summary(
-                    pdf_text, images_data, CELL_TYPE
-                )
-                if pid not in summaries: summaries[pid] = {}
-                summaries[pid].update({
-                    'pdf': pid,
-                    'cell_type': CELL_TYPE,
-                    'initial summary': initial_summary,
-                })
-                save_summaries(json_path, summaries)
-            
-            if initial_summary is None:
-                print(f"error: No initial summary found or generated for {pid}")
-                continue
-            print(f'refining summary...', end=' ')
-            fact_checked_summary = refine_summary(
-                pdf_text, images_data, initial_summary, CELL_TYPE
-            )
-            corrections = calculate_corrections(
-                initial_summary, fact_checked_summary
-            )
-            summaries[pid].update({
-                'fact-checked summary': fact_checked_summary,
-                'corrections': corrections 
-            })
-            save_summaries(json_path, summaries) 
-            print(f'done (Corrections: {corrections}).')
+    if not tasks_to_run:
+        print('no new papers to process.')
+        return summaries
 
-        except ValueError as e:
-            print(f'skipped ({e})')
-        except Exception as e:
-            print(f'\nerror processing {pid}: {e}')
-            traceback.print_exc()
+    print(f'processing {len(tasks_to_run)} papers using up to '
+          f'{MAX_WORKERS} workers...')
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=MAX_WORKERS) as executor:
+        future_to_pid = {
+            executor.submit(process_single_paper, pid, path, initial): pid
+            for pid, path, initial in tasks_to_run
+        }
+        for future in concurrent.futures.as_completed(future_to_pid):
+            pid = future_to_pid[future]
+            try:
+                result_data = future.result()
+                if result_data:
+                    results[pid] = result_data
+            except Exception as exc:
+                print(f'\n[{pid}] generated exception during result '
+                      f'retrieval: {exc}')
+                traceback.print_exc()
 
-def collect_summaries():
-    out_dir = 'out'
-    json_path = os.path.join(out_dir, f'{CELL_TYPE}_summaries.json')
-    md_path = os.path.join(out_dir, f'{CELL_TYPE}_summaries.md')
+    processed_count = len(results)
+    if processed_count > 0:
+        print(f'\nsuccessfully processed {processed_count} papers.')
+        summaries.update(results)
+        print(f'saving updated summaries to {json_path}...')
+        save_summaries(json_path, summaries)
+    else:
+        print('\nno papers were successfully processed in this run.')
 
-    print(f'collecting summaries for {CELL_TYPE} into {md_path}...')
-    summaries = load_summaries(json_path)
-    
-    if not summaries:
-        print('no summaries found to collect.')
+    return summaries
+
+def collect_summaries(out_dir: str, cell_type: str,
+                      output_filename: str,
+                      pids_to_exclude: set[str] | None = None):
+    json_path = os.path.join(out_dir, f'{cell_type}_summaries.json')
+    md_path = os.path.join(out_dir, output_filename)
+    exclude_set = pids_to_exclude or set()
+
+    print(f'\ncollecting summaries for {cell_type} into {md_path}...')
+    summaries_data = load_summaries(json_path)
+
+    if not summaries_data:
+        print('no summaries found in json to collect.')
         return
 
+    count = 0
+    written_count = 0
     with open(md_path, 'w', encoding='utf-8') as md:
-        for pid in sorted(summaries.keys()):
-            data = summaries[pid]
-            summary = data.get('fact-checked summary', '') 
+        for pid in sorted(summaries_data.keys()):
+            data = summaries_data[pid]
+            summary = data.get('fact-checked summary', '')
             if summary:
-                md.write(f'# summary for {pid} ({CELL_TYPE})\n\n')
-                md.write(f'{summary}\n\n---\n\n')
-            
-    print('summary collection finished.')
+                count += 1
+                if pid not in exclude_set:
+                    md.write(f'# summary for {pid} ({cell_type})\n\n')
+                    md.write(f'{summary}\n\n---\n\n')
+                    written_count += 1
+
+    print(f'summary collection finished for {md_path}.')
+    print(f'processed {count} summaries, wrote {written_count}.')
+    if exclude_set:
+        print(f'excluded {len(exclude_set)} pids.')
+
+
+def identify_insufficient_summaries(md_path: str, cell_type: str) -> list[str]:
+    print(f'\nidentifying summaries with minimal detail for {cell_type} '
+          f'from {md_path}...')
+    if not os.path.exists(md_path):
+        print(f'error: markdown file not found at {md_path}')
+        return []
+    with open(md_path, 'r', encoding='utf-8') as f:
+        md_content = f.read()
+
+    if not md_content.strip():
+        print('error: markdown file is empty.')
+        return []
+
+    try:
+        resp = client.chat.completions.create(
+            model=MODEL_B,
+            messages=[
+                {'role': 'system', 'content': SYSTEM_PROMPT_C},
+                {'role': 'user', 'content': f'CELL_TYPE: {cell_type}'},
+                {'role': 'user', 'content':
+                    f'Markdown Content:\n{md_content}'},
+            ],
+            max_tokens=max(2048, RESERVE_TOKENS_B // 4),
+            temperature=0.0,
+            top_p=1.0,
+            frequency_penalty=0.0,
+            presence_penalty=0.0,
+        )
+        pid_list_text = resp.choices[0].message.content.strip()
+        pids = [pid for pid in pid_list_text.splitlines() if pid.strip()]
+        print(f'found {len(pids)} summaries potentially lacking detail.')
+        return pids
+    except Exception as e:
+        print(f'error during insufficient summary identification: {e}')
+        traceback.print_exc()
+        return []
 
 if __name__ == '__main__':
-    main()
-    collect_summaries()
+    all_summaries = main()
+
+    if all_summaries:
+        out_dir = 'out'
+        full_md_filename = f'{CELL_TYPE}_summaries.md'
+        filtered_md_filename = f'{CELL_TYPE}_summaries_filtered.md'
+        full_md_path = os.path.join(out_dir, full_md_filename)
+
+        collect_summaries(out_dir, CELL_TYPE, full_md_filename)
+        insufficient_pids = identify_insufficient_summaries(
+            full_md_path, CELL_TYPE)
+
+        if insufficient_pids:
+            print("\nPIDs identified with potentially insufficient detail:")
+            for pid in insufficient_pids:
+                print(pid)
+            collect_summaries(out_dir, CELL_TYPE, filtered_md_filename,
+                              pids_to_exclude=set(insufficient_pids))
+        else:
+            print("\nno insufficient summaries identified. "
+                  "filtered file not created.")
+    else:
+        print("\nno summaries available to collect or filter.")
