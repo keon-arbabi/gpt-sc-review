@@ -1,3 +1,17 @@
+# Insufficient PIDs for microglia
+
+- Batiuk 2022
+- Herrero 2020
+- Jakel 2019
+- Kaufman 2021
+- Otero-Garcia 2022
+- Pfisterer 2020
+- Prashant 2024
+- Sadick 2022
+- Serrano-Pozo 2024
+
+---
+
 # summary for Adams 2024 (microglia)
 
 <metadata>
@@ -184,96 +198,6 @@ The disease-associated activation of microglia in HD cortex suggests a potential
 **Research Implications (≈100–200 words):**  
 This study demonstrates that microglia in the HD cingulate cortex undergo a pronounced transcriptional shift toward an activated, inflammatory state, characterized by upregulation of complement and interleukin signaling pathways. However, the absence of distinct microglial subtypes or states (such as DAM or proliferative microglia) contrasts with findings in other neurodegenerative diseases, such as Alzheimer’s disease, where such subpopulations have been described. The lack of spatial, morphological, or temporal analysis limits the ability to relate microglial activation to disease progression or regional vulnerability. Future studies should aim to resolve microglial heterogeneity at higher resolution, incorporate spatial and longitudinal data, and investigate the functional consequences of microglial activation in HD. The findings align with the broader literature on neuroinflammation in HD but do not resolve whether microglial activation is protective, detrimental, or both at different disease stages. No explicit contradictions with prior models were discussed by the authors.
 
-<contradictionFlag>none</contradictionFlag>
-
----
-
-# summary for Batiuk 2022 (microglia)
-
-<metadata>
-Batiuk MY, Tyler T, Dragicevic K, Mei S, Rydbirk R, Petukhov V, Deviatiiarov R, Sedmak D, Frank E, Feher V, Habek N, Hu Q, Igolkina A, Roszik L, Pfisterer U, Garcia-Gonzalez D, Petanjek Z, Adorjan I, Kharchenko PV, Khodosevich K. "Upper cortical layer–driven network impairment in schizophrenia." Science Advances. 2022 Oct 12;8(41):eabn8367.
-Disease focus: Schizophrenia
-</metadata>
-
-<methods>
-Single-nucleus RNA sequencing (snRNA-seq) was performed on dorsolateral prefrontal cortex (DLPFC, Brodmann area 9) from 9 schizophrenia patients and 14 matched controls. Over 220,000 neuronal nuclei were profiled using 10x Genomics v3 chemistry. Immunohistochemistry (IHC) and spatial transcriptomics (Visium) were used for validation and spatial mapping. Cell type annotation leveraged known marker genes and cross-referenced Allen Brain Institute datasets for cortical layer assignment.
-</methods>
-
-<findings>
-**Cell Type Proportions and General Patterns**
-Microglia were not the primary focus of this study, and the snRNA-seq workflow specifically enriched for neuronal nuclei (NeuN+ sorting), resulting in a dataset overwhelmingly composed of neurons (>94%), with glial nuclei (including microglia) representing only ~6% of the total. These glial nuclei were excluded from downstream analyses, and no microglial subtypes or states were characterized in detail. <keyFinding priority='3'>The study reports minimal findings for microglia, as they were largely excluded from both the primary dataset and subsequent analyses.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Microglial Subtype Identification & Characterization**
-No microglial subtypes, marker genes, or disease-associated states were identified or analyzed. The only mention of glial cells is in the context of quality control and exclusion from neuronal-focused analyses. There is no discussion of microglial heterogeneity, activation, or association with schizophrenia pathology in this paper. <keyFinding priority='3'>No microglial subtypes or disease-associated microglial states were reported or discussed.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Differential Gene Expression, Pathway Enrichment, and Spatial/Morphological Validation**
-No microglia-specific differential gene expression, pathway enrichment, or spatial/morphological validation was performed or reported. All transcriptomic, compositional, and spatial analyses were restricted to neuronal populations. <keyFinding priority='3'>No microglia-specific transcriptomic or spatial findings are presented.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Modulators & Metrics**
-No host or genetic factors, activation scores, or morphology metrics were reported for microglia. The study design and analysis framework did not address microglial biology.
-
-**Gene Regulatory Networks, Cell-Cell Communication, Genetic/Multi-omic Integration**
-No microglia-relevant gene regulatory networks, ligand-receptor interactions, or genetic risk variant associations were explored.
-
-**Aging/Disease Trajectories**
-No temporal or disease progression analyses were performed for microglia.
-
-**Summary Statement**
-<keyFinding priority='1'>This study provides no substantive findings regarding microglial heterogeneity, activation, or involvement in schizophrenia, as microglia were specifically excluded from the main analyses and dataset.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-</findings>
-
-<clinical>
-Given the exclusion of microglia from the primary dataset and analyses, this study does not provide any disease-specific insights, mechanistic hypotheses, or therapeutic implications regarding microglia in schizophrenia. The focus is entirely on neuronal subtypes, particularly those in upper cortical layers.
-</clinical>
-
----
-
-**Quick Reference (≈50–100 words):**
-This study of the dorsolateral prefrontal cortex in schizophrenia used snRNA-seq, IHC, and spatial transcriptomics, but specifically enriched for neurons and excluded glial cells—including microglia—from downstream analyses. As a result, no microglial subtypes, marker genes, or disease associations were characterized or reported. All major findings relate to neuronal populations.
-
----
-
-**Detailed Summary (≈800–1000 words):**
-
-<metadata>
-Batiuk et al. (2022) present a comprehensive single-nucleus transcriptomic and spatial analysis of the dorsolateral prefrontal cortex (DLPFC) in schizophrenia, focusing on neuronal diversity and vulnerability. The study does not address microglial biology.
-</metadata>
-
-<methods>
-The authors performed snRNA-seq on over 220,000 nuclei from postmortem DLPFC (BA9) of 9 schizophrenia patients and 14 matched controls. The experimental workflow involved NeuN+ sorting to enrich for neuronal nuclei, with glial nuclei (including microglia) representing only a minor fraction (~6%) of the dataset. These glial nuclei were explicitly excluded from downstream analyses, which focused on neuronal subtypes. Validation was performed using immunohistochemistry and Visium spatial transcriptomics, again with a neuronal focus.
-</methods>
-
-<findings>
-The study’s design and analytical pipeline were tailored to interrogate neuronal heterogeneity and disease-associated changes in schizophrenia. Microglia and other glial cells were not a focus and were systematically excluded from the main analyses. The following points summarize the microglia-relevant content:
-
-- **Cell Type Proportions:** The initial dataset included a small fraction of glial nuclei, but these were removed prior to clustering, annotation, and all subsequent analyses. The authors state: “Because our study was focused on neurons, glial nuclei were excluded from the subsequent analyses.”
-- **Subtype Identification:** No microglial subtypes or states were identified, named, or characterized. The clustering and annotation framework was built around neuronal markers and subtypes.
-- **Differential Expression and Pathways:** No microglia-specific differential gene expression or pathway enrichment analyses were performed. All reported transcriptomic changes, pathway enrichments, and gene regulatory network analyses pertain to neuronal populations.
-- **Spatial and Morphological Validation:** Immunohistochemistry and spatial transcriptomics were used to validate neuronal findings. No microglia-specific spatial or morphological data are presented.
-- **Modulators, Metrics, and Disease Trajectories:** No host or genetic factors, activation scores, or disease progression analyses were performed for microglia.
-- **Gene Regulatory Networks and Cell-Cell Communication:** The study does not address microglial transcriptional regulation or intercellular signaling.
-- **Genetic or Multi-omic Integration:** No integration of microglial transcriptomic data with genetic risk variants or multi-omic datasets is reported.
-
-The only mention of glial cells is in the context of quality control and exclusion from the main dataset. There is no discussion of microglial activation, heterogeneity, or involvement in schizophrenia pathophysiology. The authors do not report any negative findings or explicitly state the absence of microglial changes; rather, microglia are simply outside the scope of the study’s design and analysis.
-
-<keyFinding priority='1'>This study provides no substantive findings regarding microglial heterogeneity, activation, or involvement in schizophrenia, as microglia were specifically excluded from the main analyses and dataset.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-</findings>
-
-<clinical>
-Because microglia were not analyzed, the study does not offer any disease-specific roles, mechanistic insights, or therapeutic implications for microglia in schizophrenia. All clinical and mechanistic conclusions are restricted to neuronal subtypes, particularly those in upper cortical layers.
-</clinical>
-
----
-
-**Research Implications (≈100–200 words):**
-This study exemplifies a neuron-centric approach to single-nucleus transcriptomics in psychiatric disease, with microglia and other glial cells systematically excluded from analysis. As such, it does not contribute to the understanding of microglial heterogeneity, activation states, or their potential roles in schizophrenia. The absence of microglial data highlights a gap in the current literature and underscores the need for future studies that specifically profile microglia—using unbiased nuclei isolation or glia-enrichment protocols—to elucidate their contributions to disease mechanisms. The findings here neither support nor contradict existing models of microglial involvement in schizophrenia, as the cell type was not interrogated. Researchers interested in microglial biology in psychiatric disorders should seek out studies with explicit glial or microglial profiling, as this work does not address those questions.
-
----
-
-**Tag Summary:**
-<keyFinding priority='1'>No microglial findings: microglia were excluded from the main dataset and analyses.</keyFinding>
-<confidenceLevel>high</confidenceLevel>
 <contradictionFlag>none</contradictionFlag>
 
 ---
@@ -1565,78 +1489,6 @@ This work provides a high-resolution map of microglial heterogeneity in the huma
 
 ---
 
-# summary for Herrero 2020 (microglia)
-
-**Quick Reference (≈100 words)**
-
-In Herrero et al. (2020, Molecular Autism), single-nucleus RNA-seq of postmortem human amygdala from ASD and control individuals revealed that microglia (MG) constitute a distinct cluster but show minimal transcriptional or proportional changes in ASD. No microglial subtypes with disease-associated signatures were identified, and no significant differentially expressed genes (DEGs) were reported for microglia in ASD versus controls. The study’s main findings center on excitatory neurons, with microglia remaining largely unaltered in ASD amygdala during the postnatal period examined. <keyFinding priority='3'>Microglia show no major ASD-associated transcriptional or compositional changes in this dataset.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
----
-
-**Detailed Summary (≈800–1000 words)**
-
-<metadata>
-- Herrero MJ, Velmeshev D, Hernandez-Pineda D, et al. (2020). "Identification of amygdala-expressed genes associated with autism spectrum disorder." Molecular Autism 11:39. https://doi.org/10.1186/s13229-020-00346-1
-- Disease focus: Autism Spectrum Disorder (ASD)
-</metadata>
-
-<methods>
-The study combined datamining of ASD risk genes with single-nucleus RNA sequencing (snRNA-seq) of human amygdala. snRNA-seq was performed on microdissected amygdala tissue from five ASD and five control postmortem brains (ages 4–20 years). Cell clusters were annotated using canonical marker genes, and differential gene expression was assessed using MAST, controlling for diagnosis, age, sex, RIN, and postmortem interval. The dataset included 15 cell clusters, one of which was annotated as microglia (MG, C11).
-</methods>
-
-<findings>
-**Cell Type Proportions:**  
-Microglia (MG, C11) were identified as a distinct cluster in the amygdala snRNA-seq dataset. The study does not report any significant change in the proportion of microglia between ASD and control samples. <keyFinding priority='3'>No evidence for altered microglial abundance in ASD amygdala in this cohort.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Differential Gene Expression:**  
-The authors performed cell type-specific differential expression analysis across all clusters. For microglia, no significant differentially expressed genes (DEGs) were identified between ASD and control samples (FDR < 0.05, >10% expression difference). The main DEGs and disease-associated changes were found in excitatory neurons and astrocytes, not microglia. <keyFinding priority='3'>Microglia did not exhibit significant transcriptional changes in ASD amygdala.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Cell Subtype Identification & Characterization:**  
-Microglia were annotated as a single cluster (MG, C11) based on canonical marker expression (e.g., ITGAM). The study does not report further subdivision of microglia into subtypes or states (e.g., homeostatic, activated, disease-associated). No evidence is provided for disease-associated microglial subpopulations or altered activation states in ASD. <keyFinding priority='3'>No microglial subtypes or disease-associated states were identified in the amygdala during the postnatal period studied.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-**Pathway Enrichment, Morphological/Spatial Validation, and Trajectories:**  
-No pathway enrichment or spatial/morphological validation data are reported for microglia. The study does not discuss microglial involvement in aging or disease trajectories, nor does it provide pseudotime or activation state modeling for microglia.
-
-**Modulators & Metrics:**  
-No host or genetic factors (e.g., age, sex, ASD risk alleles) were found to modulate microglial states or abundance in this dataset. No quantitative activation or morphology scores were reported for microglia.
-
-**Gene Regulatory Networks & Cell-Cell Communication:**  
-The study does not report microglia-specific gene regulatory networks, transcription factors, or ligand-receptor interactions relevant to ASD.
-
-**Genetic or Multi-omic Integration:**  
-No integration of microglial transcriptomes with ASD GWAS or eQTL data is presented.
-
-<keyFinding priority='3'>Overall, microglia in the postnatal human amygdala show no significant ASD-associated changes in gene expression, subpopulation structure, or abundance in this study.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
-</findings>
-
-<clinical>
-The absence of microglial transcriptional or compositional changes in ASD amygdala suggests that, at least during the postnatal period (ages 4–20 years) and in this brain region, microglia may not play a prominent role in ASD pathophysiology. The findings do not support microglia as a major driver or biomarker of ASD-related changes in the amygdala at this developmental stage. <keyFinding priority='3'>No evidence for microglia as a therapeutic or diagnostic target in postnatal ASD amygdala based on this dataset.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-</clinical>
-
----
-
-**Research Implications (≈100–200 words)**
-
-This study provides a negative result for microglial involvement in ASD-related changes in the postnatal human amygdala, contrasting with reports of microglial activation in other brain regions or developmental windows in ASD. The lack of microglial subtypes or disease-associated states suggests that, in the amygdala and at the ages sampled, microglia remain largely homeostatic. This finding aligns with the study’s focus on neuronal and astrocytic changes as primary drivers of ASD pathology in this region. However, the authors acknowledge limitations, including the restricted age range (4–20 years) and the absence of fetal or early postnatal samples, where microglial roles might differ. Future studies with larger cohorts, earlier developmental stages, and spatial transcriptomics may be needed to fully exclude microglial contributions to ASD in the amygdala. <contradictionFlag>none</contradictionFlag> The findings are consistent with the current literature on amygdala microglia in ASD, as discussed by the authors.
-
----
-
-**Summary Table of Microglial Findings**
-
-| Microglial Subtype | Marker Genes | Functional Role | ASD Association | Validation | Notes |
-|--------------------|--------------|----------------|-----------------|-----------|-------|
-| MG (C11)           | ITGAM, etc.  | Homeostatic    | None detected   | N/A       | No subtypes or DEGs in ASD |
-
----
-
-**Tag Summary:**  
-<keyFinding priority='3'>Microglia show no major ASD-associated transcriptional or compositional changes in this dataset.</keyFinding>  
-<confidenceLevel>high</confidenceLevel>  
-<contradictionFlag>none</contradictionFlag>
-
----
-
 # summary for Hoffman 2023 (microglia)
 
 **Quick Reference**
@@ -1870,63 +1722,6 @@ This study highlights a striking lack of AD-associated microglial activation or 
 
 ---
 
-# summary for Jakel 2019 (microglia)
-
-1) **Quick Reference**
-
-This study (Jäkel et al., Nature 2019) used single-nucleus RNA-seq of human white matter to reveal that microglia, while present among immune cell clusters, were not the primary focus; instead, the work provides a detailed atlas of oligodendrocyte heterogeneity in multiple sclerosis (MS). Microglia were identified as a distinct cluster (AIF1+, CD74+), but the main findings concern oligodendroglial subtypes and their disease-associated shifts. No major microglial subtypes or disease-specific microglial states are reported or analyzed in depth in this paper.
-
----
-
-2) **Detailed Summary**
-
-<metadata>
-Jäkel S, Agirre E, Mendanha Falcão A, van Bruggen D, Lee KW, Knuesel I, Malhotra D, ffrench-Constant C, Williams A, Castelo-Branco G. "Altered human oligodendrocyte heterogeneity in multiple sclerosis." Nature. 2019 May 9;566(7745):543–547. doi:10.1038/s41586-019-0903-2.
-Disease focus: Multiple Sclerosis (MS)
-</metadata>
-
-<methods>
-The study performed single-nucleus RNA sequencing (snRNA-seq) on post-mortem human white matter from five controls and four progressive MS patients, using the 10x Genomics platform. Tissue regions included normal-appearing white matter (NAWM) and various MS lesion types. Data integration and clustering were performed with Seurat and canonical correlation analysis (CCA). Cell type identities were validated by immunohistochemistry (IHC) and in situ hybridization (ISH).
-</methods>
-
-<findings>
-Microglia were identified as a distinct cluster in the snRNA-seq dataset, marked by canonical genes such as AIF1 (IBA1) and CD74, and visualized in tSNE projections (see Figure 1g). However, the study does not report further subclustering, differential gene expression, or disease-associated states within the microglial population. The main immune cell findings relate to the presence of macrophages and immune oligodendroglia (imOLG), the latter expressing some microglial/immune markers (e.g., CD74, HLA.DRA, C3, PTPRC) and showing proximity to microglia in transcriptomic space.
-
-No quantitative changes in microglial proportions between control and MS samples are reported, nor are there analyses of microglial activation states, marker gene shifts, or pathway enrichments specific to microglia. The immune cell cluster, including microglia, is noted to reflect immunological infiltration in MS, but the focus is on the oligodendrocyte lineage.
-
-The only indirect microglial-related finding is the identification of imOLG, a population of oligodendroglia expressing immune genes (CD74, HLA.DRA, C3, PTPRC) and closely associated with microglia in tSNE space. This population is enriched in MS tissue and may represent a disease-associated state with immunological features, but it is not a microglial subtype per se.
-
-No spatial, morphological, or temporal (pseudotime) analyses are presented for microglia. The study does not discuss microglial gene regulatory networks, ligand-receptor interactions, or genetic modulators (e.g., MS risk variants) in relation to microglia.
-
-<keyFinding priority='3'>
-Microglia are present as a distinct cluster (AIF1+, CD74+) in human white matter, but no further subtypes or disease-associated microglial states are reported or analyzed.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
-<keyFinding priority='2'>
-A population of immune oligodendroglia (imOLG) expresses immune/microglial markers (CD74, HLA.DRA, C3, PTPRC) and is enriched in MS, suggesting cross-lineage immune activation, but this does not represent a microglial subtype.
-</keyFinding>
-<confidenceLevel>medium</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-</findings>
-
-<clinical>
-The study does not provide direct disease-specific mechanistic insights into microglia in MS. The presence of microglia and immune cells is consistent with known CNS inflammation in MS, but no novel microglial subtypes, activation states, or biomarkers are proposed. The enrichment of imOLG with immune features may suggest altered glial cross-talk or immune activation in MS, but the implications for microglial function remain unexplored in this work.
-</clinical>
-
----
-
-3) **Research Implications**
-
-This study does not advance the classification or understanding of microglial heterogeneity in MS, as its primary focus is on oligodendrocyte lineage diversity. The identification of microglia as a distinct cluster with canonical markers is consistent with prior single-cell/nucleus studies, but no new microglial subtypes or disease-associated states are described. The enrichment of immune oligodendroglia expressing microglial/immune genes in MS raises questions about glial plasticity and immune activation, but the functional relationship to microglia is not dissected here.
-
-Open questions for microglia in MS—such as the existence of disease-associated microglial states, their transcriptional signatures, and their roles in demyelination or repair—remain unaddressed in this dataset. The findings align with established cell type identification schemes but do not contradict or extend current models of microglial heterogeneity. Future studies with a focus on microglia, deeper subclustering, and integration with spatial or functional data will be needed to clarify microglial roles in MS pathogenesis.
-
-<contradictionFlag>none</contradictionFlag>
-
----
-
 # summary for Johansen 2023 (microglia)
 
 **Quick Reference (≈100 words)**
@@ -2073,83 +1868,6 @@ This study reinforces the concept that microglial activation, and specifically t
 - <keyFinding priority='2'>GPNMB+ microglia are increased in PD/LBD, paralleling AD DAM.</keyFinding>
 - <confidenceLevel>high</confidenceLevel> (robust, validated, consistent with prior studies)
 - <contradictionFlag>details</contradictionFlag> (explicitly discussed: PD risk is not enriched in microglia, unlike AD)
-
----
-
-# summary for Kaufman 2021 (microglia)
-
-<metadata>
-Kaufmann M, Evans H, Schaupp A-L, et al. Identifying CNS-colonizing T cells as potential therapeutic targets to prevent progression of multiple sclerosis. Med. 2021;2(3):296–312. https://doi.org/10.1016/j.medj.2021.01.006
-Disease focus: Multiple sclerosis (MS), with emphasis on relapsing-remitting (RRMS) and progressive forms (SPMS/PPMS).
-</metadata>
-
-<methods>
-This study employed multimodal single-cell RNA sequencing (scRNA-seq) and surface protein profiling (CITE-seq) on peripheral blood mononuclear cells (PBMCs) from MS patients (RRMS, PPMS) and matched controls. Longitudinal sampling included RRMS patients before and during natalizumab (anti-VLA4) treatment. Spatial RNA sequencing was performed on post-mortem brain tissue from SPMS patients and controls to localize immune cell populations. The analysis integrated 497,705 single-cell transcriptomes and 355,433 surface protein profiles from 71 PBMC samples, and ~85,000 spatial transcriptomes from 20 brain slices.
-</methods>
-
-<findings>
-**Microglia:**
-The study’s primary focus was on peripheral immune cells, particularly CNS-homing T cells, rather than resident CNS microglia. Microglia were not a central subject of the main analyses, and the paper does not report significant findings regarding microglial heterogeneity, subtypes, or disease-associated states in MS.
-
-- **Cell Type Proportions:**  
-  Microglia were not directly quantified or analyzed for proportional changes in either blood or brain tissue. The spatial RNA-seq analysis specifically excluded microglia from the T cell signature enrichment, confirming that the identified T cell (T09) signature was not present in microglia or astrocytes (see Figure 6B and associated text).
-
-- **Differential Gene Expression & Pathway Enrichment:**  
-  No microglia-specific differential gene expression or pathway enrichment analyses were reported. The CNS-homing T cell signature was validated to be absent from microglia, using a public single-nucleus RNA-seq dataset of MS brain tissue.
-
-- **Cell Subtype Identification & Characterization:**  
-  The study did not identify or characterize microglial subtypes or states. Instead, it focused on distinguishing T cell subtypes, particularly the CD161+/LTB+ (KLRB1+/LTB+) T09 cluster, and ensured that this signature was not confounded by microglial gene expression.
-
-- **Spatial Analysis:**  
-  Spatial transcriptomics was used to localize T09 T cells in MS brain tissue, with explicit validation that the T09 signature did not overlap with microglial or astrocytic regions. There is no mention of microglial spatial heterogeneity, activation, or association with demyelinated lesions in this dataset.
-
-- **Aging/Disease Trajectories:**  
-  No microglial pseudotime, trajectory, or disease progression analyses were performed or reported.
-
-- **Genetic or Multi-omic Integration:**  
-  No eQTL, GWAS, or multi-omic integration was performed for microglia.
-
-- **Contradiction/Conflict:**  
-  The authors explicitly state that the T09 T cell signature is not enriched in microglia or astrocytes, referencing a public dataset (Schirmer et al., Nature 2019) for validation. No contradictions or novel findings regarding microglia are discussed.
-  <contradictionFlag>none</contradictionFlag>
-
-**Summary:**  
-The study provides no evidence for significant findings regarding microglial subtypes, activation states, or their role in MS pathogenesis. All major findings pertain to peripheral and CNS-infiltrating T cells, with microglia only referenced as a negative control for T cell signature specificity.
-</findings>
-
-<clinical>
-Microglia are not implicated in the disease mechanisms or therapeutic strategies proposed in this study. The authors’ mechanistic and translational focus is on CNS-homing CD4+ T cells (T09), not on resident microglia. No microglia-derived biomarkers or therapeutic targets are suggested.
-</clinical>
-
----
-
-**Quick Reference (≈100 words):**  
-This study does not report significant findings on microglia in multiple sclerosis. Microglia were used as a negative control to validate the specificity of a pathogenic CNS-homing T cell (T09) signature, ensuring it was not present in resident CNS cells. No microglial subtypes, marker genes, or disease associations were identified or discussed. The main findings center on CD161+/LTB+ T cells, not microglia. <contradictionFlag>none</contradictionFlag>
-
----
-
-**Detailed Summary (≈800–1000 words):**  
-The paper by Kaufmann et al. (2021) investigates the role of CNS-homing T cells in the progression of multiple sclerosis (MS), using a combination of single-cell RNA sequencing, surface protein profiling, and spatial transcriptomics. The central hypothesis is that progressive MS may be driven by the accumulation and residence of pathogenic immune cells behind the blood-brain barrier, beyond the reach of current immunomodulatory therapies.
-
-The study’s experimental design centers on the identification and characterization of a specific CD4+ T cell population (T09, CD161+/LTB+) in the blood and brains of MS patients. The authors use natalizumab treatment to trap CNS-homing cells in the blood, enabling their molecular profiling. They then track these cells in untreated MS patients and localize them in post-mortem brain tissue using spatial RNA sequencing.
-
-**Microglia:**
-Despite the comprehensive single-cell and spatial transcriptomic profiling, microglia are not a focus of the study. The authors do not report any findings regarding microglial heterogeneity, subtypes, or activation states in MS. Instead, microglia are referenced solely as a negative control in the validation of the T09 T cell signature. Specifically, the authors use a publicly available single-nucleus RNA-seq dataset (Schirmer et al., Nature 2019) to confirm that the T09 signature is not enriched in microglia or astrocytes, ensuring the specificity of their T cell findings.
-
-There is no discussion of microglial marker genes, functional states (e.g., homeostatic, disease-associated), or their spatial distribution in MS lesions. The spatial transcriptomics analysis is focused on the localization of T09 T cells in white and gray matter, with no mention of microglial involvement or changes.
-
-The absence of microglial findings is explicitly addressed in the methods and results, where the authors state that the T09 signature was tested and found not to be present in microglia or astrocytes. This serves to strengthen the specificity of their T cell-centric conclusions but does not provide new insights into microglial biology in MS.
-
-**Contradiction/Conflict:**  
-No contradictions or departures from prior microglial data are discussed. The authors’ use of microglia as a negative control is consistent with existing knowledge of cell type-specific gene expression in the CNS. <contradictionFlag>none</contradictionFlag>
-
-**Summary:**  
-In summary, this study does not contribute new information on microglial subtypes, activation, or their role in MS. Microglia are only referenced to validate the specificity of T cell findings, and no microglia-focused analyses or results are presented.
-
----
-
-**Research Implications (≈100–200 words):**  
-The lack of microglial findings in this study highlights the specificity of the authors’ approach to dissecting peripheral immune cell contributions to MS progression. While the paper advances our understanding of CNS-homing T cells as potential therapeutic targets, it leaves open the question of how resident CNS cells, particularly microglia, interact with infiltrating lymphocytes and contribute to neurodegeneration in progressive MS. Future studies integrating high-resolution single-nucleus RNA-seq of brain tissue, with a focus on microglial heterogeneity and their crosstalk with T cells, will be essential to build a more complete picture of MS pathogenesis. The current study’s negative findings for microglia are consistent with its design and do not contradict existing models, but they underscore the need for dedicated microglia-centric investigations in MS. <contradictionFlag>none</contradictionFlag>
 
 ---
 
@@ -3751,149 +3469,6 @@ This work establishes a foundational map of human microglial heterogeneity, high
 
 ---
 
-# summary for Otero-Garcia 2022 (microglia)
-
-<metadata>
-Otero-Garcia M, Mahajani SU, Wakhloo D, et al. "Molecular signatures underlying neurofibrillary tangle susceptibility in Alzheimer’s disease." Neuron. 2022 Sep 21;110(18):2929-2948.e8. doi:10.1016/j.neuron.2022.06.021.
-Disease focus: Alzheimer’s disease (AD), with a focus on neurofibrillary tangle (NFT) pathology in human prefrontal cortex (BA9).
-</metadata>
-
-<methods>
-This study developed a FACS-based method to isolate and profile single neuronal somas with and without NFTs from fresh-frozen human AD brain tissue (Braak VI) and age-matched controls. Over 120,000 single-cell transcriptomes were generated (snRNA-seq and single-soma RNA-seq), enabling comparison of NFT-bearing and NFT-free neurons across 20 neocortical subtypes. Morphological and spatial validation was performed using immunohistochemistry (IHC), in situ hybridization (ISH), and quantitative histology.
-</methods>
-
-<findings>
-**Microglia: Cell Type Proportions and Subtype Analysis**
-The primary focus of this study was on neuronal populations and their susceptibility to NFT formation and death. Microglia were not a central focus, and the paper does not provide a detailed analysis of microglial subtypes, activation states, or transcriptomic changes in microglia in relation to NFT pathology. The single-cell and single-nucleus datasets were generated from FACS-sorted neuronal somas (MAP2+), and the clustering and downstream analyses were restricted to excitatory and inhibitory neuronal subtypes. Glial cells, including microglia, were only briefly mentioned in the context of method validation (e.g., the ability to isolate MAP2–/AT8+ glial cells from progressive supranuclear palsy [PSP] brains), but no systematic profiling or characterization of microglial populations was performed in the AD or control samples.
-
-**Cell Type Proportions:**  
-There is no quantitative data or discussion of microglial abundance, proliferation, or loss in AD versus control tissue in this study. The cell isolation and FACS gating strategy specifically excluded non-neuronal (MAP2–) cells from the main AD and control datasets.
-
-**Differential Gene Expression and Pathway Enrichment:**  
-No microglia-specific differential gene expression or pathway enrichment analyses were reported. The study’s pathway analyses (e.g., synaptic signaling, oxidative phosphorylation, apoptosis) were performed exclusively on neuronal clusters.
-
-**Cell Subtype Identification & Characterization:**  
-No microglial subtypes or states (e.g., homeostatic, disease-associated microglia [DAM], activated, proliferative) were identified or characterized. The study did not report marker genes, functional signatures, or disease associations for microglial populations.
-
-**Modulators & Metrics:**  
-No host or genetic factors (e.g., APOE genotype, age, sex) were analyzed in relation to microglial states or abundance.
-
-**Gene Regulatory Networks, Cell-Cell Communication, Spatial Analysis:**  
-No microglia-specific gene regulatory networks, ligand-receptor interactions, or spatial/morphological validation of microglial states were presented.
-
-**Aging/Disease Trajectories, Genetic or Multi-omic Integration:**  
-No temporal modeling, pseudotime analysis, or integration with GWAS/eQTL data was performed for microglia.
-
-<keyFinding priority='3'>
-The study’s methodology and analysis pipeline were not designed to capture or resolve microglial heterogeneity or disease-associated states in AD cortex. Microglia were not included in the main single-cell transcriptomic analyses.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-</findings>
-
-<clinical>
-**Disease-Specific Roles and Mechanistic Insights:**  
-This study does not provide new insights into microglial roles in AD, NFT formation, or neurodegeneration. No mechanistic or biomarker implications for microglia are discussed.
-
-**Therapeutic or Biomarker Implications:**  
-No microglia-related therapeutic targets or biomarkers are proposed or evaluated.
-
-<keyFinding priority='3'>
-Microglia are not addressed as a disease-relevant cell type in this study; thus, no clinical or translational implications for microglia can be drawn from these data.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-</clinical>
-
----
-
-**Quick Reference (≈50–100 words):**
-This study does not analyze microglia in the context of Alzheimer’s disease. The single-cell transcriptomic profiling and downstream analyses were restricted to neuronal somas, with no data or findings reported for microglial subtypes, marker genes, or disease associations. As such, no conclusions regarding microglial heterogeneity, activation, or involvement in NFT pathology can be drawn from this work.
-
----
-
-**Detailed Summary (≈800–1000 words):**
-The paper by Otero-Garcia et al. (2022) presents a comprehensive single-cell transcriptomic analysis of neuronal vulnerability to neurofibrillary tangle (NFT) pathology in Alzheimer’s disease (AD) using a novel FACS-based method to isolate and profile single neuronal somas from human prefrontal cortex. The study’s primary aim was to resolve the molecular signatures distinguishing NFT-prone from NFT-resistant neuronal subtypes and to uncouple NFT susceptibility from neuronal death. Over 120,000 single-cell transcriptomes were generated from both AD and control brains, with a focus on 20 neocortical neuronal subtypes.
-
-However, microglia were not a focus of this investigation. The cell isolation protocol specifically targeted MAP2+ neuronal somas, and the main datasets and clustering analyses were restricted to excitatory and inhibitory neurons. While the authors briefly mention that their FACS method could, in principle, be used to isolate glial cells with tau aggregates (as demonstrated in PSP tissue), no such analysis was performed for microglia in the AD or control samples. There is no mention of microglial marker genes, subtypes, or activation states in the results, figures, or supplementary materials.
-
-Consequently, the study does not report on:
-- Microglial cell type proportions or changes in AD versus control.
-- Differential gene expression or pathway enrichment in microglia.
-- Identification or characterization of microglial subtypes (e.g., homeostatic, DAM, proliferative).
-- Associations between microglial states and NFT burden, amyloid pathology, or clinical variables.
-- Morphological or spatial validation of microglial activation or clustering.
-- Modulation of microglial states by host or genetic factors (e.g., APOE, age, sex).
-- Microglia-specific gene regulatory networks, ligand-receptor interactions, or cell-cell communication.
-- Temporal modeling or disease trajectory analysis for microglia.
-- Integration of microglial transcriptomes with GWAS or eQTL data.
-
-The absence of microglial data is a direct consequence of the study’s design, which prioritized neuronal profiling to address questions of selective neuronal vulnerability to tau pathology. The authors do not discuss microglial findings from other studies, nor do they comment on the potential role of microglia in NFT formation or neurodegeneration within their own data.
-
-<keyFinding priority='3'>
-The lack of microglial analysis is a clear limitation for those interested in glial contributions to AD, but it is consistent with the study’s stated aims and methodology.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
----
-
-**Research Implications (≈100–200 words):**
-This study provides no new information on microglial heterogeneity, activation, or disease association in Alzheimer’s disease. The absence of microglial data highlights a gap in the single-cell landscape of AD presented here, especially given the growing recognition of microglia as key modulators of neurodegeneration and tau pathology in other recent sc/snRNA-seq studies. Future work using similar high-throughput single-cell approaches should include microglia and other glial populations to enable a more comprehensive understanding of cell-type-specific responses to tau aggregation and neurodegeneration. Integration of neuronal and microglial transcriptomic data, particularly in spatial context, will be essential to elucidate cell-cell interactions and the contribution of microglial states (e.g., DAM, interferon-responsive, proliferative) to AD progression and NFT pathology. The authors’ FACS-based method could, in principle, be adapted for microglial profiling, but such analyses remain to be performed.
-
-<contradictionFlag>none</contradictionFlag>
-
----
-
-# summary for Pfisterer 2020 (microglia)
-
-1) **Quick Reference (Microglia in Pfisterer et al., 2020, Nat Commun)**
-
-This single-nucleus RNA-seq study of human temporal cortex in epilepsy (TLE) primarily focuses on neuronal subtypes, with only minimal analysis of microglia. Microglia were present in the NeuN-negative fraction, but the paper reports no significant disease-associated changes, subtypes, or transcriptomic shifts in microglia between epileptic and control samples. Demographic and pathological drivers of microglial states are not discussed.
-
----
-
-2) **Detailed Summary**
-
-<metadata>
-Pfisterer U, Petukhov V, Demharter S, et al. Identification of epilepsy-associated neuronal subtypes and gene expression underlying epileptogenesis. Nature Communications. 2020;11:5038. doi:10.1038/s41467-020-18752-7
-Disease focus: Temporal lobe epilepsy (TLE)
-</metadata>
-
-<methods>
-The study uses single-nucleus RNA sequencing (snRNA-seq) via 10x Genomics and Smart-seq2 on human temporal cortex samples from TLE patients and non-epileptic controls. Both NeuN-positive (neuronal) and NeuN-negative (non-neuronal, including glia) nuclei were isolated and sequenced. The main analysis centers on >110,000 neuronal nuclei, but a subset of four samples (two TLE, two controls) underwent snRNA-seq of the NeuN-negative fraction to profile glial and other non-neuronal populations.
-</methods>
-
-<findings>
-The primary focus of the study is on neuronal diversity and disease-associated neuronal subtypes. Microglia are only briefly mentioned in the context of quality control and cell-type annotation. Specifically, the authors state that the NeuN-negative fraction, sequenced from a subset of samples, "came from glial and other nonneuronal populations" and that "only a very small proportion within this population displayed a neuronal identity" (Supplementary Fig. 1c–e). There is no further breakdown or analysis of microglial subtypes, marker genes, or disease-associated states.
-
-- **Cell Type Proportions:** The paper does not report quantitative changes in microglial abundance between epilepsy and control samples.
-- **Differential Gene Expression:** No microglia-specific differential expression analysis is presented.
-- **Pathway Enrichment:** No pathway or functional enrichment is reported for microglia.
-- **Cell Subtype Identification & Characterization:** The study does not identify or characterize microglial subtypes or states. There is no mention of homeostatic, activated, or disease-associated microglial populations.
-- **Modulators & Metrics:** No analysis of demographic, genetic, or pathological factors influencing microglial states is provided.
-- **Gene Regulatory Networks, Cell-Cell Communication, Spatial Analysis, Aging/Disease Trajectories, Genetic or Multi-omic Integration:** None of these aspects are addressed for microglia.
-<keyFinding priority='3'>Microglia are present in the dataset but are not analyzed for disease-associated changes, subtypes, or transcriptomic shifts.</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
-The authors' main conclusion regarding non-neuronal cells is that the NeuN-negative fraction is largely glial, but they do not pursue further analysis of these populations. The absence of microglial findings is consistent throughout the main text and supplementary materials.
-</findings>
-
-<clinical>
-No disease-specific roles, mechanistic insights, or biomarker/therapeutic implications are discussed for microglia in this study. The paper does not address microglial involvement in epileptogenesis or cortical pathology in TLE.
-</clinical>
-
----
-
-3) **Research Implications**
-
-This study provides no substantive data on microglial heterogeneity, activation states, or disease association in human temporal lobe epilepsy. The lack of microglial analysis is a notable gap, especially given the growing recognition of microglia in epilepsy pathophysiology. Future research should leverage single-cell/nucleus approaches to systematically characterize microglial subtypes, activation markers (e.g., TMEM119, P2RY12, CD68, APOE), and their relationship to neuronal pathology in epilepsy. The absence of microglial findings here neither supports nor contradicts prior models, as the authors do not discuss or compare their glial data to previous literature. This highlights the need for dedicated glial-focused single-cell studies in human epilepsy.
-
-<contradictionFlag>none</contradictionFlag>
-
----
-
 # summary for Pineda 2024 (microglia)
 
 <metadata>
@@ -3971,51 +3546,6 @@ Microglia in ALS and FTLD motor and prefrontal cortex exhibit a partial shift fr
 
 **Research Implications (≈150 words):**  
 This study provides a nuanced view of microglial involvement in ALS and FTLD cortex, identifying a partial but not full transition to disease-associated states. The absence of a robust DAM or pro-inflammatory signature, in contrast to findings in ALS spinal cord or mouse models, raises questions about regional specificity and the technical sensitivity of snRNA-seq for microglial activation genes. The results align with some prior human cortical studies but diverge from the strong microglial activation seen in animal models and spinal cord, a point the authors attribute in part to nuclear profiling limitations (<contradictionFlag>details</contradictionFlag>: "our data only partially reflect microglial changes, given that nuclear profiling has limited capability in detecting changes to microglial activation genes in tissue"). Open questions include whether more sensitive single-cell or spatial transcriptomic methods would reveal additional microglial heterogeneity or activation, and how microglial states interact with neuronal vulnerability in ALS/FTLD. Future work should integrate multi-omic and spatial approaches to resolve these issues and clarify the therapeutic potential of targeting microglial states in these diseases.
-
----
-
-# summary for Prashant 2024 (microglia)
-
-**Quick Reference**
-
-This large-scale single-nucleus RNA-seq (snRNA-seq) atlas of Parkinson’s disease (PD) profiled over 2 million nuclei from five brain regions across 100 donors, spanning the full spectrum of PD pathology. Microglia were robustly identified as a major cell type across all regions, but the paper does **not report detailed microglial subtypes, marker genes, or disease-associated microglial states**. No significant microglial subtype heterogeneity or disease-stage associations are described. <keyFinding priority='3'>Microglia are present and quantifiable in all sampled regions, but no further disease- or subtype-specific findings are reported.</keyFinding> <confidenceLevel>high</confidenceLevel> <contradictionFlag>none</contradictionFlag>
-
----
-
-**Detailed Summary**
-
-<metadata>
-- Prashant N. M. et al., 2024, Scientific Data
-- Disease focus: Parkinson’s disease (PD)
-</metadata>
-
-<methods>
-This study generated single-nucleus RNA-seq (snRNA-seq) and whole-genome sequencing (WGS) data from 100 postmortem human donors (75 PD cases, 25 controls), covering five brain regions: dorsal motor nucleus of the Xth nerve (DMNX), globus pallidus interna (GPI), primary motor cortex (PMC), dorsolateral prefrontal cortex (DLPFC), and primary visual cortex (PVC). The cohort was carefully selected to represent the full spectrum of PD neuropathological severity (Braak PD staging) and included extensive clinical and demographic metadata. Nuclei were isolated, hashed, and sequenced using 10x Genomics 3’ v3.1 chemistry, with rigorous quality control and computational demultiplexing. Cell clustering and annotation were performed using SCANPY and Pegasus, with batch correction and doublet removal.
-</methods>
-
-<findings>
-Microglia were robustly identified as one of the nine major cell type clusters present in all five brain regions, as visualized in the UMAP (Fig. 3g). The dataset includes a large number of microglial nuclei, enabling future in-depth analyses. However, **this Data Descriptor does not present any further breakdown of microglial subtypes, disease-associated states, or region-specific microglial heterogeneity**. There is no mention of differential gene expression, marker genes, or pathway enrichment specific to microglia. The paper does not report changes in microglial proportions, activation states, or associations with Braak stage, genotype, or clinical variables.
-
-No spatial, morphological, or in situ validation of microglial subpopulations is described. The authors do not discuss microglial aging or disease trajectories, nor do they integrate genetic risk or multi-omic data with microglial states. The focus of the paper is on dataset generation, quality control, and resource availability, rather than biological dissection of microglial heterogeneity.
-
-<keyFinding priority='3'>Microglia are present as a major cell type in all sampled regions, but the paper does not report any microglial subtypes, marker genes, or disease associations.</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
-<clinical>
-No disease-specific roles, mechanistic insights, or therapeutic implications for microglia are discussed in this paper. The dataset is positioned as a resource for future studies to explore such questions.
-</clinical>
-
----
-
-**Research Implications**
-
-This dataset provides a valuable foundation for future research into microglial heterogeneity and function in Parkinson’s disease, given its large sample size, multi-region coverage, and integration with clinical and genetic data. However, the current Data Descriptor does **not** analyze microglial subtypes, activation states, or disease associations. Researchers interested in microglia will need to perform secondary analyses to identify homeostatic versus disease-associated microglial states, marker genes, and region- or stage-specific changes. The dataset’s scale and metadata enable such work, but no findings are reported here. There are no explicit conflicts or departures from prior microglial models discussed in this paper. <contradictionFlag>none</contradictionFlag>
-
-**In summary:**  
-- Microglia are included as a major cell type in this snRNA-seq atlas of PD, but no further characterization is provided.
-- The dataset is well-suited for future microglial analyses, but this publication does not address microglial subtype diversity or disease relevance.
-- No conflicts with prior microglial literature are discussed; the paper is a resource release, not a mechanistic study.
 
 ---
 
@@ -4301,83 +3831,6 @@ This study provides strong evidence that microglia in the adult human prefrontal
 
 ---
 
-# summary for Sadick 2022 (microglia)
-
-<metadata>
-Sadick JS, O’Dea MR, Hasel P, Dykstra T, Faustin A, Liddelow SA. "Astrocytes and oligodendrocytes undergo subtype-specific transcriptional changes in Alzheimer’s disease." Neuron. 2022 Jun 1;110(11):1788-1805.e10. doi:10.1016/j.neuron.2022.03.008
-Disease focus: Alzheimer’s disease (AD)
-</metadata>
-
-<methods>
-Single-nucleus RNA sequencing (snRNA-seq) was performed on postmortem human prefrontal cortex tissue from AD and age-matched non-symptomatic (NS) donors, all with APOE ε2/3 genotype. Astrocytes were enriched by FACS (LHX2+/NeuN–), but all major glial and neural cell types were captured. Pathology (amyloid, tau, GFAP) was quantified in the same tissue region as sequencing. Data were integrated with published AD snRNA-seq datasets for cross-study comparison.
-</methods>
-
-<findings>
-**Cell Type Proportions and General Findings**  
-Microglia were captured in the dataset but were not the primary focus of enrichment. The study does not report major findings or detailed subclustering for microglia, as the primary emphasis is on astrocytes and oligodendrocytes. Microglia are present as a reference population for cell type identification and integration.
-
-**Microglial Subtypes and Disease Associations**  
-The paper does not provide a systematic breakdown of microglial subtypes, marker genes, or disease-associated states. In the main text, microglia are referenced in the context of cell type identification (e.g., expressing C1QA, C1QB, C1QC, TYROBP, P2RY12, HEXB, TREM2, CTSS) and as a comparator for astrocyte and oligodendrocyte analyses. There is no evidence of microglial subclustering, nor are microglial activation states (e.g., homeostatic, DAM, or other disease-associated microglia) described or quantified.
-
-**Differential Gene Expression and Pathway Enrichment**  
-No microglia-specific differential gene expression or pathway enrichment analyses are reported. The study does not discuss changes in microglial proportions, gene expression, or functional states between AD and NS donors.
-
-**Spatial and Morphological Validation**  
-No spatial, morphological, or immunohistochemical validation is presented for microglia. The focus of spatial transcriptomics and immunostaining is on astrocyte subtypes and their localization.
-
-**Integration with Other Datasets**  
-Microglia are included in the integrated datasets for cell type annotation and clustering, but the study does not analyze microglial heterogeneity or disease associations in detail. There is no discussion of microglial subtypes across datasets or their relationship to AD pathology.
-
-**Host or Genetic Modulators**  
-No analysis of host factors (age, sex, APOE, GWAS variants) on microglial states is provided.
-
-**Contradictions or Departures**  
-The authors do not discuss any findings regarding microglia that contradict or depart from previous literature. The lack of microglial focus is acknowledged by omission rather than explicit discussion.
-
-<keyFinding priority='3'>
-This study does not report significant findings regarding microglial heterogeneity, subtypes, or disease-associated states in Alzheimer’s disease. Microglia are present as a reference population but are not analyzed in detail.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-</findings>
-
-<clinical>
-No disease-specific roles, mechanistic insights, or biomarker/therapeutic implications are discussed for microglia in this study. The paper’s focus is on astrocyte and oligodendrocyte subtype changes in AD, and microglia are not implicated in the reported findings.
-</clinical>
-
----
-
-**Quick Reference**
-This study does not report significant findings for microglia in Alzheimer’s disease. Microglia are included as a reference cell type for clustering and integration, but no subtypes, marker genes, or disease associations are described or analyzed.
-
----
-
-**Detailed Summary**
-
-Sadick et al. (2022) present a single-nucleus RNA-seq study of human prefrontal cortex in Alzheimer’s disease (AD) and age-matched non-symptomatic (NS) controls, focusing on astrocyte and oligodendrocyte heterogeneity. Microglia are captured in the dataset and identified using canonical marker genes (C1QA, C1QB, C1QC, TYROBP, P2RY12, HEXB, TREM2, CTSS), but the study does not pursue further analysis of microglial subtypes, activation states, or disease associations.
-
-The methodology includes FACS enrichment for astrocytes (LHX2+/NeuN–), but all major CNS cell types, including microglia, are present in the dataset. Microglia are used as a reference for cell type annotation and for integration with other published AD snRNA-seq datasets. However, the results and discussion sections do not provide a breakdown of microglial subtypes, nor do they report differential gene expression, pathway enrichment, or changes in microglial proportions between AD and NS donors.
-
-No spatial transcriptomics or immunohistochemical validation is performed for microglia. The spatial and morphological analyses are focused exclusively on astrocyte subtypes. Similarly, the integration of multiple datasets is used to resolve astrocyte and oligodendrocyte subpopulations, with no mention of microglial heterogeneity or disease-associated states.
-
-There is no analysis of host or genetic factors (such as APOE genotype) on microglial states, nor is there discussion of microglial involvement in AD pathology. The absence of microglial findings is not discussed as a contradiction or limitation, but rather reflects the study’s explicit focus on astrocytes and oligodendrocytes.
-
-<keyFinding priority='3'>
-Microglia are present in the dataset and identified by canonical markers, but the study does not analyze microglial subtypes, activation states, or disease associations in Alzheimer’s disease.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
----
-
-**Research Implications**
-
-This study does not advance knowledge of microglial heterogeneity or function in Alzheimer’s disease. The lack of microglial analysis is a consequence of the study’s design, which prioritizes astrocyte and oligodendrocyte enrichment and characterization. As such, the paper does not address open questions regarding microglial subtypes (e.g., DAM, homeostatic, or other states), their marker genes, or their relationship to AD pathology. The findings neither support nor contradict existing microglial classification schemes, as microglia are not analyzed in detail. Future studies with microglia-focused enrichment and subclustering will be required to address these gaps.
-
-<contradictionFlag>none</contradictionFlag>
-
----
-
 # summary for Sayed 2021 (microglia)
 
 <metadata>
@@ -4517,76 +3970,6 @@ Microglia in MS lesions, particularly at chronic active rims, adopt a highly act
 3) **Research Implications (≈100–200 words)**
 
 This study provides a detailed molecular atlas of microglial heterogeneity in human MS lesions, highlighting the spatial and functional diversity of microglial responses. The identification of phagocytosing microglia/macrophages by the presence of myelin-derived transcripts is a novel approach, validated both in situ and in vitro, and may be applicable to other demyelinating or neurodegenerative conditions. The spatial restriction of activated microglia to lesion rims underscores the importance of microenvironmental cues in shaping microglial states. Open questions remain regarding the functional consequences of prolonged microglial activation and iron accumulation—whether these states are neurotoxic, reparative, or context-dependent. The study does not directly address genetic or environmental modulators of microglial phenotypes, nor does it resolve whether similar subtypes exist in early MS or in response to therapy. The findings are largely consistent with prior models of microglial activation in MS, but the explicit demonstration of myelin mRNA uptake as a marker of phagocytosis is a significant advance. Future work should address the temporal dynamics, reversibility, and therapeutic modulation of these microglial states in MS and related disorders. <contradictionFlag>none</contradictionFlag>
-
----
-
-# summary for Serrano-Pozo 2024 (microglia)
-
-<metadata>
-Serrano-Pozo A, Li H, Li Z, et al. "Astrocyte transcriptomic changes along the spatiotemporal progression of Alzheimer’s disease." Nature Neuroscience, 2024. https://doi.org/10.1038/s41593-024-01791-4
-Disease focus: Alzheimer’s disease (AD)
-</metadata>
-
-<methods>
-Single-nucleus RNA sequencing (snRNA-seq) was performed on 628,943 nuclei enriched for astrocytes from five brain regions (entorhinal cortex [EC], inferior temporal gyrus [ITG], dorsolateral prefrontal cortex [PFC], secondary visual cortex [V2], and primary visual cortex [V1]) from 32 human donors spanning the full spectrum from normal aging to severe AD. Neuronal and oligodendrocyte nuclei were depleted by FANS. Adjacent tissue was used for quantitative immunohistochemistry (Aβ plaque load) and ELISA (pTau/tau ratio). Morphological and spatial validation was performed by immunohistochemistry and in situ hybridization.
-</methods>
-
-<findings>
-**Cell Type Proportions:**  
-Microglia were present in the dataset but were not the primary focus of enrichment or downstream clustering. The main analyses and subclustering were performed on astrocytes, with microglia nuclei identified as a minor population in the initial UMAPs. The paper does not report detailed microglial subclustering or quantitative changes in microglial proportions across regions or pathology stages.
-
-**Differential Gene Expression:**  
-The study does not provide a systematic analysis of microglial gene expression changes, marker genes, or pathway enrichment in relation to AD pathology, spatial gradients, or temporal progression. Microglial marker genes (e.g., P2RY12, CD74) are shown in initial cell type identification plots, confirming the presence of microglia, but no further microglial-specific findings are reported.
-
-**Cell Subtype Identification & Characterization:**  
-No microglial subtypes or states are defined or characterized in this study. The clustering, marker gene analysis, and functional annotation are focused exclusively on astrocytes. There is no breakdown of microglial subpopulations, nor are disease-associated microglial states (e.g., DAM, PAM) discussed or identified.
-
-**Modulators & Metrics:**  
-No host, genetic, or pathological modulators of microglial states are analyzed or reported. No activation or morphology scores for microglia are presented.
-
-**Gene Regulatory Networks, Cell-Cell Communication, Spatial Analysis, Aging/Disease Trajectories, Genetic or Multi-omic Integration:**  
-None of these analyses are performed for microglia in this study. The entirety of the spatial, temporal, and trajectory modeling is centered on astrocyte biology.
-
-<contradictionFlag>none</contradictionFlag>
-</findings>
-
-<clinical>
-The study does not address microglial roles in AD, nor does it provide mechanistic or therapeutic insights related to microglia. All disease relevance and mechanistic discussion are focused on astrocyte responses.
-</clinical>
-
----
-
-**Quick Reference (≈50–100 words):**  
-This study does not report significant findings on microglia. While microglia were present among the nuclei sequenced, all subclustering, marker gene, and trajectory analyses were focused on astrocytes. No microglial subtypes, marker genes, or disease associations are described, and no spatial or temporal changes in microglial states are reported. <contradictionFlag>none</contradictionFlag>
-
----
-
-**Detailed Summary (≈800–1000 words):**  
-<keyFinding priority='3'>
-The single-nucleus RNA-seq study by Serrano-Pozo et al. (2024) provides a comprehensive atlas of astrocyte transcriptomic changes across five brain regions and four stages of Alzheimer’s disease neuropathology. The methodology involved enrichment for astrocyte nuclei by depleting neurons and oligodendrocytes, but microglia were not specifically targeted for enrichment or downstream analysis. In the initial cell type identification, microglia were recognized as a minor population based on canonical marker gene expression (e.g., P2RY12, CD74), but the study does not proceed to analyze microglia in detail.
-</keyFinding>
-<confidenceLevel>high</confidenceLevel>
-<contradictionFlag>none</contradictionFlag>
-
-The main focus of the paper is the identification and characterization of astrocyte subclusters, their spatial and temporal dynamics, and their association with AD pathology. All major findings, including the definition of homeostatic, intermediate, and reactive astrocyte states, as well as the modeling of astrocyte trajectories and exhaustion, are restricted to astrocytes. No microglial subtypes (such as disease-associated microglia [DAM], proliferative-region associated microglia [PAM], or other states) are defined, nor are microglial marker genes or functional pathways discussed in the context of AD progression.
-
-The study does not report any quantitative changes in microglial proportions across brain regions or pathology stages. There is no analysis of microglial gene expression changes, pathway enrichment, or regulatory networks. No spatial or morphological validation of microglial states is performed, and no cell-cell communication analyses involving microglia are presented.
-
-Furthermore, the paper does not discuss microglial responses in relation to host or genetic factors (such as APOE genotype, age, or sex), nor does it integrate microglial data with genetic or multi-omic risk factors. All discussion of disease mechanisms, therapeutic implications, and biomarker potential is centered on astrocyte biology.
-
-<contradictionFlag>none</contradictionFlag>
-
-In summary, while microglia are present in the dataset and identified in initial cell type plots, the study does not provide any substantive findings regarding microglial heterogeneity, disease association, or functional roles in AD. The absence of microglial analysis is consistent throughout the paper, and no contradictions or departures from prior microglial literature are discussed.
-
----
-
-**Research Implications (≈100–200 words):**  
-This study does not advance the understanding of microglial heterogeneity or function in Alzheimer’s disease. The lack of microglial subclustering, marker gene analysis, or disease association highlights a gap that remains to be addressed in future work. Given the central role of microglia in AD pathogenesis, as established in other single-cell studies, the absence of microglial analysis in this large, multi-region dataset represents a missed opportunity. Future studies could leverage the existing data to perform dedicated microglial subclustering and trajectory modeling, potentially revealing region- and stage-specific microglial states. The findings here neither support nor contradict established microglial classification schemes, as microglia are not analyzed beyond initial identification. <contradictionFlag>none</contradictionFlag>
-
----
-
-**Summary:**  
-This paper provides no significant findings on microglia; all major analyses and conclusions are restricted to astrocytes. Microglia are present in the dataset but not characterized or discussed in relation to Alzheimer’s disease progression.
 
 ---
 
@@ -5342,6 +4725,66 @@ Open questions include whether these microglial states persist in long COVID, th
 
 <contradictionFlag>details</contradictionFlag>  
 The authors explicitly state that while COVID-19 microglia overlap with DAM/ARM/Mic1, they are not identical, particularly in the upregulation of RIPK1 and other inflammatory genes, marking a departure from prior neurodegenerative models.
+
+---
+
+# summary for Yang 2022 (microglia)
+
+1) **Quick Reference (≈100 words)**
+
+This study by Yang et al. (Nature, 2022) provides a comprehensive single-nucleus RNA-seq atlas of the human brain vasculature, including microglia, from Alzheimer’s disease (AD) and control brains. Microglia are transcriptionally distinct from perivascular macrophages, with >300 differentially expressed genes and new human-specific markers. No major disease-associated microglial subtypes were identified, and microglial proportions did not significantly change in AD. However, several AD GWAS genes previously considered microglia-specific in mice (e.g., INPP5D, HLA-DRB1) are also expressed in human vascular cells, suggesting a partial evolutionary shift in AD risk gene expression. APOE genotype did not drive major microglial changes.
+
+---
+
+2) **Detailed Summary (≈800–1000 words)**
+
+<metadata>
+- Yang AC, Vest RT, Kern F, et al. "A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk." Nature. 2022 Mar 31;603(7903):885-892. doi:10.1038/s41586-021-04369-3
+- Disease focus: Alzheimer’s disease (AD)
+</metadata>
+
+<methods>
+This study used single-nucleus RNA sequencing (snRNA-seq) via the VINE-seq protocol to profile 143,793 nuclei from hippocampus and frontal cortex of 17 individuals (9 AD, 8 controls). The method enriched for vascular and perivascular cell types, including microglia, from post-mortem human brain tissue. Immunohistochemistry and in situ hybridization validated key marker genes and spatial localization.
+</methods>
+
+<findings>
+**Cell Type Proportions:**  
+Microglia were robustly captured as a distinct cluster, transcriptionally separated from perivascular macrophages and other immune cells. The proportion of microglia did not significantly differ between AD and control samples, nor between hippocampus and cortex (<confidenceLevel>high</confidenceLevel>). No evidence was found for the emergence of new, disease-associated microglial subtypes in AD, in contrast to findings in mouse models and some prior human studies (<contradictionFlag>details</contradictionFlag>: The authors note that context-dependent, disease-associated glial subpopulations were not observed for microglia in their dataset, differing from some previous reports).
+
+**Differential Gene Expression & Subtype Characterization:**  
+Microglia and perivascular macrophages were distinguished by >300 differentially expressed genes, yielding new markers for human studies (e.g., microglia: P2RY12, C3, SPP1; perivascular macrophages: CD163, MRC1, LYVE1). These markers were validated by immunohistochemistry (<confidenceLevel>high</confidenceLevel>). Microglia exhibited a canonical homeostatic signature, with no clear evidence for DAM (disease-associated microglia) or other activation states specifically enriched in AD brains. The authors did not report further microglial subclustering or identification of distinct microglial states beyond the main homeostatic population.
+
+**Pathway Enrichment:**  
+Pathway analysis of microglia-specific genes highlighted TGF-β signaling, regulation of neuron migration, and neuron death, as well as endocytic and phagocytic pathways. These signatures were consistent with known microglial functions in homeostasis and immune surveillance (<confidenceLevel>high</confidenceLevel>).
+
+**Disease Associations and GWAS Integration:**  
+A major finding is that several AD GWAS genes previously considered microglia-specific in mice (e.g., INPP5D, HLA-DRB1, CD2AP, PLCG2) are also robustly expressed in human vascular and perivascular cell types, including endothelial cells, smooth muscle cells, and fibroblasts (<keyFinding priority='1'>). This suggests a partial evolutionary transfer of AD risk gene expression from microglia in mice to vascular cells in humans (<confidenceLevel>high</confidenceLevel>). Immunostaining confirmed vascular localization of these proteins. The authors explicitly discuss this as a departure from the prevailing model that microglia are the sole mediators of these genetic risk factors in the human brain (<contradictionFlag>details</contradictionFlag>: The authors note that the depletion of vascular cells in prior studies may have led to an overemphasis on microglia as the main GWAS gene-expressing cell type).
+
+**Modulators & Metrics:**  
+No significant effects of APOE genotype, age, or sex on microglial proportions or transcriptional states were reported. The study did not identify microglial activation or proliferation in association with AD pathology or APOE4 status (<confidenceLevel>high</confidenceLevel>).
+
+**Spatial Analysis:**  
+Immunohistochemistry validated the spatial localization of microglia and perivascular macrophages, confirming their distinct anatomical niches. Microglia were parenchymal, while perivascular macrophages localized to vessel walls.
+
+**Aging/Disease Trajectories:**  
+No evidence for microglial trajectory shifts or emergence of disease-associated states was found in pseudotime or clustering analyses. The authors note that their findings contrast with some mouse studies and human datasets that report DAM or other reactive microglial states in AD (<contradictionFlag>details</contradictionFlag>: The authors explicitly state that they did not observe DAM-like subpopulations in their human data).
+
+**Gene Regulatory Networks & Cell-Cell Communication:**  
+No specific microglial transcription factors or ligand-receptor interactions were highlighted as altered in AD. The focus was on the broader finding that AD risk genes are not exclusively microglial in humans.
+
+</findings>
+
+<clinical>
+Microglia in the human brain vasculature maintain a homeostatic, surveillance phenotype in both health and AD, without clear evidence for disease-associated subtypes or activation in this dataset. The partial evolutionary shift of AD risk gene expression from microglia (in mice) to vascular cells (in humans) suggests that vascular and perivascular cells may play a more prominent role in mediating genetic risk for AD than previously appreciated. This finding may have implications for therapeutic targeting and biomarker development, as it broadens the range of cell types implicated in AD pathogenesis beyond microglia alone. However, the lack of microglial activation or DAM-like states in this study suggests that microglial contributions to AD may be more subtle or context-dependent in humans.
+</clinical>
+
+---
+
+3) **Research Implications (≈100–200 words)**
+
+This study challenges the prevailing view that microglia are the principal mediators of AD genetic risk in the human brain, showing that many AD GWAS genes previously considered microglia-specific in mice are also expressed in human vascular and perivascular cells. This suggests an evolutionary shift in the cellular context of AD risk, with implications for understanding disease mechanisms and for the design of therapeutic strategies. The absence of DAM or other disease-associated microglial subtypes in this large, well-powered human dataset raises questions about the translatability of mouse microglial activation paradigms to human AD. Open questions include whether microglial activation states are more transient, spatially restricted, or context-dependent in humans, and how vascular-microglial interactions contribute to AD pathogenesis. The findings align with recent calls for broader cell-type and species-specific analyses in neurodegenerative disease research. The authors explicitly discuss the conflict with prior models and suggest that future studies should integrate vascular, perivascular, and microglial biology to fully capture the complexity of AD risk and progression.
+
+<contradictionFlag>details</contradictionFlag>: The authors note that their failure to detect DAM-like microglial states in human AD brains contrasts with some previous mouse and human studies, and they attribute this in part to methodological differences and the expanded cell-type coverage of their atlas.
 
 ---
 
