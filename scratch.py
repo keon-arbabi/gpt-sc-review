@@ -1024,7 +1024,9 @@ def generate_review_framework(summaries_for_synthesis: dict,
 
     print('review framework generation complete.')
 
-for CELL_TYPE in ['microglia', 'astrocytes', 'oligodendrocytes',
+
+for CELL_TYPE in ['microglia', 'astrocytes', 
+                  'oligodendrocytes and oligodendrocyte progenitors (OPCs)',
                   'excitatory neurons', 'inhibitory neurons',
                   'endothelial and vascular cells']:
     all_summaries = main()
